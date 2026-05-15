@@ -1,0 +1,11 @@
+[project]
+name = "simple-ids-creator"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "ifcopenshell>=0.8.5",
+    "ifctester>=0.8.5",
+    "pandas[excel]>=3.0.3",
+]
