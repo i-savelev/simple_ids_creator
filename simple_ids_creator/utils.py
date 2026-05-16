@@ -35,4 +35,4 @@ def _is_marked(value: Any) -> bool:
     :returns: `True`, если ячейка помечена.
     """
     text = _normalize_text(value).lower()
-    return text in {"1", "1.0", "true", "yes", "x", "да"}
+    return text in {"1", "1.0", "true", "yes", "x", "да", "+"}

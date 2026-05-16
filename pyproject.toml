@@ -8,4 +8,5 @@ dependencies = [
     "ifcopenshell>=0.8.5",
     "ifctester>=0.8.5",
     "pandas[excel]>=3.0.3",
+    "pyinstaller>=6.20.0",
 ]

@@ -1,0 +1,40 @@
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | ДАННЫЕ [Первые строки таблицы]:
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | Тип: dict, Кол-во: 17
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [0] = {0: 'Таблица 1. Требования к информационному наполнению моделей раздела AR', 1: '№', 2: 1, 3: 2, 4: 3, 5: 4, 6: 5}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | ДАННЫЕ [Первые строки таблицы]:
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [1] = {0: nan, 1: 'Имя атрибута', 2: 'Марка', 3: 'Наименование', 4: 'Обозначение', 5: 'Предел огнестойкости', 6: 'Материал'}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | Тип: dict, Кол-во: 7
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [2] = {0: nan, 1: 'Тип значения', 2: 'IFCTEXT', 3: 'IFCTEXT', 4: 'IFCTEXT', 5: 'IFCTEXT', 6: 'IFCTEXT'}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [0] = {0: 'Таблица 7. Общие требования к информационному наполнению моделей', 1: '№', 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 7...
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [3] = {0: nan, 1: 'IFC property set (опционально)', 2: nan, 3: nan, 4: nan, 5: nan, 6: nan}
+� пожарной опасности', 4: 'Общая площадь здания', 5: 'Объ...
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [4] = {0: nan, 1: 'IfcWall', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+'IFCTEXT', 4: 'IFCREAL', 5: 'IFCREAL', 6: 'IFCREAL', 7: 'IFCTEXT', 8: 'IFCT...
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [5] = {0: nan, 1: 'IfcWallStandardCase', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+� объекта', 3: 'Указывается класс конструктивной пожарной опасности, согласн...
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [6] = {0: nan, 1: 'IfcColumn', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [4] = {0: nan, 1: 'IFC property set (опционально)', 2: nan, 3: nan, 4: nan, 5: nan, 6: nan, 7: nan, 8: nan, 9: nan}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [5] = {0: nan, 1: 'Тип класса элементов', 2: 'Характеристики здания', 3: 'Характеристики здания', 4: 'Характеристики здания', ...
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [8] = {0: nan, 1: 'IfcWindow', 2: 1, 3: 1, 4: 1, 5: 1, 6: 1}
+', 6: '+', 7: '+', 8: '+', 9: '+'}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [9] = {0: nan, 1: 'IfcSlab', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [10] = {0: nan, 1: 'IfcRoof', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [11] = {0: nan, 1: 'IfcCovering', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [12] = {0: nan, 1: 'IfcCurtainWall', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [13] = {0: nan, 1: 'IfcMember', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [14] = {0: nan, 1: 'IfcPlate', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [15] = {0: nan, 1: 'IfcStair', 2: nan, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:02 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [16] = {0: nan, 1: 'IfcRailing', 2: 1, 3: 1, 4: 1, 5: nan, 6: 1}
+2026-05-16 18:05:16 | INFO     | ids_builder.py:42 | ids_builderbuild_ids_from_table | Чтение таблицы: C:\Users\ilyas\Desktop\SVLV\Work\РКС Чистые воды\КОС-29\Разработка ПИМ и ТЗ\ПРИЛОЖЕНИЕ 05. Требования к информационному наполнению моделей\Таблица 7. Общие требования к информационному наполнению моделей.xlsx
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | ДАННЫЕ [Первые строки таблицы]:
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table | Тип: dict, Кол-во: 7
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [0] = {0: 'Таблица 7. Общие требования к информационному наполнению моделей', 1: '№', 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 7...
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [1] = {0: nan, 1: 'Имя атрибута', 2: 'Адрес', 3: 'Класс конструктивной пожарной опасности', 4: 'Общая площадь здания', 5: 'Объ...
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [2] = {0: nan, 1: 'Тип значения', 2: 'IFCTEXT', 3: 'IFCTEXT', 4: 'IFCREAL', 5: 'IFCREAL', 6: 'IFCREAL', 7: 'IFCTEXT', 8: 'IFCT...
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [3] = {0: nan, 1: 'Описание', 2: 'Указывается адрес объекта', 3: 'Указывается класс конструктивной пожарной опасности, согласн...
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [4] = {0: nan, 1: 'IFC property set (опционально)', 2: nan, 3: nan, 4: nan, 5: nan, 6: nan, 7: nan, 8: nan, 9: nan}
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [5] = {0: nan, 1: 'Тип класса элементов', 2: 'Характеристики здания', 3: 'Характеристики здания', 4: 'Характеристики здания', ...
+2026-05-16 18:05:17 | DEBUG    | ids_builder.py:130 | ids_builder_read_table |    [6] = {0: nan, 1: 'IfcBuilding', 2: '+', 3: '+', 4: '+', 5: '+', 6: '+', 7: '+', 8: '+', 9: '+'}
+2026-05-16 18:05:17 | INFO     | ids_builder.py:46 | ids_builderbuild_ids_from_table | Извлечено строк требований: 9
+2026-05-16 18:05:17 | INFO     | ids_builder.py:61 | ids_builderbuild_ids_from_table | IDS сохранен: C:\Users\ilyas\Documents\GitHub\simple_ids_creator\build\table7_test.ids
+2026-05-16 18:05:17 | INFO     | ids_builder.py:62 | ids_builderbuild_ids_from_table | XMLSchema validation result: True

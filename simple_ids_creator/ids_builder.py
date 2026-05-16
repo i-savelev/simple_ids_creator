@@ -15,6 +15,9 @@ _DEFAULT_SPECIFICATION_USAGE = "optional"
 _DEFAULT_IFC_VERSIONS = ["IFC2X3", "IFC4", "IFC4X3_ADD2"]
 _DEFAULT_PROPERTY_SET_NAME = "Параметры"
 _SUPPORTED_IFC_DATA_TYPES: set[str] = set()
+_ATTRIBUTE_NAME_HEADERS = {"имя атрибута"}
+_VALUE_TYPE_HEADERS = {"тип значения"}
+_PROPERTY_SET_HEADERS = {"ifc property set (опционально)", "ifc property set"}
 
 
 def build_ids_from_table(
@@ -141,38 +144,146 @@ def _extract_requirement_rows(table_frame: pd.DataFrame) -> tuple[str, list[dict
     :returns: Заголовок и нормализованные строки требований.
     :raises ValueError: Если таблица слишком короткая.
     """
-    if len(table_frame.index) < 3:
-        raise ValueError("В таблице недостаточно строк для извлечения шапки и данных.")
+    if len(table_frame.index) < 2:
+        raise ValueError("В таблице недостаточно строк для извлечения заголовков и данных.")
 
     title = _normalize_text(table_frame.iloc[0, 0])
-    data_frame = table_frame.iloc[2:].copy()
+    header_row_index = _find_header_row_index(table_frame)
+    column_map = _build_column_map(table_frame.iloc[header_row_index].tolist())
+    data_frame = table_frame.iloc[header_row_index + 1 :].copy()
     data_frame = data_frame.reset_index(drop=True)
 
     requirement_rows: list[dict[str, Any]] = []
-    class_headers = [_normalize_text(value) for value in table_frame.iloc[1, 4:].tolist()]
-
     for _, row in data_frame.iterrows():
-        source_name = _normalize_text(row.iloc[1])
+        source_name = _get_row_value(row, column_map["attribute_name_index"])
         if not source_name:
             continue
+
         marked_classes = [
-            class_name
-            for class_name, cell_value in zip(class_headers, row.iloc[4:].tolist(), strict=False)
-            if class_name and _is_marked(cell_value)
+            ifc_class
+            for ifc_class, class_index in column_map["ifc_class_indexes"].items()
+            if _is_marked(_get_row_value(row, class_index))
         ]
         if not marked_classes:
             continue
+
         requirement_rows.append(
             {
                 "source_name": source_name,
-                "value_type": _normalize_text(row.iloc[2]),
-                "property_set": _normalize_text(row.iloc[3]),
+                "value_type": _get_row_value(row, column_map["value_type_index"]),
+                "property_set": _get_row_value(row, column_map["property_set_index"]),
                 "ifc_classes": marked_classes,
-                "row_number": _normalize_text(row.iloc[0]),
+                "row_number": _get_row_value(row, column_map["row_number_index"]),
             }
         )
 
     return title, requirement_rows
+
+
+def _find_header_row_index(table_frame: pd.DataFrame) -> int:
+    """
+    Найти строку, содержащую заголовки полей требований.
+
+    Поиск выполняется по наличию обязательных названий колонок, а не по
+    фиксированной позиции строки, чтобы поддерживать несколько шаблонов таблиц.
+
+    :param table_frame: Сырые табличные данные.
+    :returns: Индекс строки заголовков.
+    :raises ValueError: Если строка заголовков не найдена.
+    """
+    for row_index in range(len(table_frame.index)):
+        normalized_values = {_normalize_header_name(value) for value in table_frame.iloc[row_index].tolist()}
+        if _ATTRIBUTE_NAME_HEADERS & normalized_values and _VALUE_TYPE_HEADERS & normalized_values:
+            return row_index
+    raise ValueError("Не удалось определить строку заголовков в таблице.")
+
+
+def _build_column_map(header_row: list[Any]) -> dict[str, Any]:
+    """
+    Построить карту индексов колонок по их именам.
+
+    Обязательные служебные поля ищутся по названиям, а IFC-классы определяются
+    по заголовкам, которые состоят из одного слова и начинаются с `Ifc`.
+
+    :param header_row: Значения строки заголовков.
+    :returns: Словарь с индексами служебных колонок и IFC-классов.
+    :raises ValueError: Если обязательные колонки не найдены.
+    """
+    attribute_name_index: int | None = None
+    value_type_index: int | None = None
+    property_set_index: int | None = None
+    row_number_index: int | None = None
+    ifc_class_indexes: dict[str, int] = {}
+
+    for column_index, header_value in enumerate(header_row):
+        normalized_header = _normalize_header_name(header_value)
+        if normalized_header == "№":
+            row_number_index = column_index
+        elif normalized_header in _ATTRIBUTE_NAME_HEADERS:
+            attribute_name_index = column_index
+        elif normalized_header in _VALUE_TYPE_HEADERS:
+            value_type_index = column_index
+        elif normalized_header in _PROPERTY_SET_HEADERS:
+            property_set_index = column_index
+        elif _is_ifc_header(header_value):
+            ifc_class_indexes[_normalize_text(header_value)] = column_index
+
+    if attribute_name_index is None:
+        raise ValueError("Не найдена колонка 'Имя атрибута'.")
+    if value_type_index is None:
+        raise ValueError("Не найдена колонка 'Тип значения'.")
+    if not ifc_class_indexes:
+        raise ValueError("Не найдены колонки IFC-классов.")
+
+    return {
+        "row_number_index": row_number_index,
+        "attribute_name_index": attribute_name_index,
+        "value_type_index": value_type_index,
+        "property_set_index": property_set_index,
+        "ifc_class_indexes": ifc_class_indexes,
+    }
+
+
+def _normalize_header_name(value: Any) -> str:
+    """
+    Нормализовать имя заголовка для устойчивого сравнения.
+
+    :param value: Исходное значение заголовка.
+    :returns: Нормализованное имя в нижнем регистре.
+    """
+    normalized_text = _normalize_text(value)
+    if normalized_text == "№":
+        return normalized_text
+    return " ".join(normalized_text.lower().split())
+
+
+def _is_ifc_header(value: Any) -> bool:
+    """
+    Проверить, что заголовок похож на имя IFC-класса.
+
+    Под IFC-классом здесь понимается одно слово без пробелов, начинающееся
+    с префикса `Ifc`.
+
+    :param value: Значение заголовка.
+    :returns: `True`, если заголовок соответствует шаблону IFC-класса.
+    """
+    normalized_text = _normalize_text(value)
+    if not normalized_text:
+        return False
+    return " " not in normalized_text and normalized_text.lower().startswith("ifc")
+
+
+def _get_row_value(row: pd.Series, column_index: int | None) -> str:
+    """
+    Безопасно получить значение ячейки по индексу колонки.
+
+    :param row: Строка таблицы.
+    :param column_index: Индекс колонки или `None`.
+    :returns: Нормализованное строковое значение.
+    """
+    if column_index is None:
+        return ""
+    return _normalize_text(row.iloc[column_index])
 
 
 def _build_specifications_by_class(
