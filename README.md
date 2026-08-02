@@ -1,5 +1,8 @@
 # simple-ids-creator
 
+<img width="2800" height="1602" alt="изображение" src="https://github.com/user-attachments/assets/20ceaaec-dce8-4ef0-81ed-ae6904b724db" />
+
+
 Графическое приложение для генерации IDS-файлов из CSV- и Excel-таблиц.
 
 Проект читает таблицу требований, группирует строки по IFC-классам и сохраняет результат в формате IDS через `ifctester`.
